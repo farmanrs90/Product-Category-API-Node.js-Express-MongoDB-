@@ -10,7 +10,7 @@ const DB_URL=process.env.DB_URL
         console.log('Connected!');
         
 
-    } catch (error) {console.log('error connection Mongo DB');
+    } catch (error) {console.log(error.message);
     
         
     }
