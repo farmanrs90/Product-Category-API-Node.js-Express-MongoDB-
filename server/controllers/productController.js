@@ -2,8 +2,17 @@ const ProductModel = require('../models/productModel')
 const getAllProducts = async (req, res) => {
     try {
 
-        const products = await ProductModel.find({})
+        const { search, sort } = req.query
+        let query = {}
+        if (search) {
+            query.title = { $regex: search, $options: "i" }
+        }
+        let products = ProductModel.find(query).populate('category', 'name')
 
+        if (sort) {
+            products = products.sort(sort)
+        }
+        products = await products
         res.status(200).json({
             success: true,
             data: products

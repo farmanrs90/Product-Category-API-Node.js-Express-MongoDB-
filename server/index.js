@@ -4,13 +4,13 @@ const cors = require('cors')
 require('dotenv').config()
 const categoryRoute = require('./routes/categoryRoutes')
 const productRoute = require('./routes/productRoutes')
-
+const logger=require('./middlewares/loggerMiddleware')
 const rateLimit = require('express-rate-limit')
 const app = express()
 app.use(express.json())
 
 
-
+app.use(logger)
 
 app.use('/api/products', productRoute)
 app.use('/api/categories', categoryRoute)
